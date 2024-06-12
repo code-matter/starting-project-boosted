@@ -1,10 +1,10 @@
-import { DUMMY_NEWS } from '../../../../../lib/constants/dummy-news'
 import { notFound } from 'next/navigation'
 import React from 'react'
+import { getNewsItem } from '../../../../../lib/utils/news'
 
-const ImagePage = ({ params }) => {
+const ImagePage = async ({ params }) => {
     const { newsId } = params
-    const currentNews = DUMMY_NEWS.find(news => news.slug === newsId)
+    const currentNews = await getNewsItem(newsId)
     if (!currentNews) notFound()
 
     return (

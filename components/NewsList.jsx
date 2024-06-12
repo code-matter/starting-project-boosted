@@ -7,7 +7,7 @@ const NewsList = ({ news }) => {
             {news.map(currentNews => {
                 return (
                     <li key={currentNews.id}>
-                        <Link href={`/news/${currentNews.slug}`}>
+                        <Link href={`/news/${currentNews.newsId}`}>
                             <img
                                 src={`/images/news/${currentNews.image}`}
                                 alt={currentNews.title}

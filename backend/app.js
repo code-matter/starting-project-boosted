@@ -5,7 +5,7 @@ import cors from 'cors'
 const DUMMY_NEWS = [
     {
         id: 'n1',
-        mealId: 'will-ai-replace-humans',
+        newsId: 'will-ai-replace-humans',
         title: 'Will AI Replace Humans?',
         image: 'ai-robot.jpg',
         date: '2021-07-01',
@@ -14,7 +14,7 @@ const DUMMY_NEWS = [
     },
     {
         id: 'n2',
-        mealId: 'beaver-plague',
+        newsId: 'beaver-plague',
         title: 'A Plague of Beavers',
         image: 'beaver.jpg',
         date: '2022-05-01',
@@ -23,7 +23,7 @@ const DUMMY_NEWS = [
     },
     {
         id: 'n3',
-        mealId: 'couple-cooking',
+        newsId: 'couple-cooking',
         title: 'Spend more time together!',
         image: 'couple-cooking.jpg',
         date: '2024-03-01',
@@ -32,7 +32,7 @@ const DUMMY_NEWS = [
     },
     {
         id: 'n4',
-        mealId: 'hiking',
+        newsId: 'hiking',
         title: 'Hiking is the best!',
         image: 'hiking.jpg',
         date: '2024-01-01',
@@ -41,7 +41,7 @@ const DUMMY_NEWS = [
     },
     {
         id: 'n5',
-        mealId: 'landscape',
+        newsId: 'landscape',
         title: 'The beauty of landscape',
         image: 'landscape.jpg',
         date: '2022-07-01',
@@ -54,19 +54,19 @@ const db = sqlite('data.db')
 
 function initDb() {
     db.prepare(
-        'CREATE TABLE IF NOT EXISTS news (id INTEGER PRIMARY KEY, mealId TEXT UNIQUE, title TEXT, content TEXT, date TEXT, image TEXT)'
+        'CREATE TABLE IF NOT EXISTS news (id INTEGER PRIMARY KEY, newsId TEXT UNIQUE, title TEXT, content TEXT, date TEXT, image TEXT)'
     ).run()
 
     const { count } = db.prepare('SELECT COUNT(*) as count FROM news').get()
 
     if (count === 0) {
         const insert = db.prepare(
-            'INSERT INTO news (mealId, title, content, date, image) VALUES (?, ?, ?, ?, ?)'
+            'INSERT INTO news (newsId, title, content, date, image) VALUES (?, ?, ?, ?, ?)'
         )
 
         DUMMY_NEWS.forEach(news => {
             insert.run(
-                news.mealId,
+                news.newsId,
                 news.title,
                 news.content,
                 news.date,
