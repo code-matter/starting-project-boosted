@@ -1,12 +1,15 @@
 import NewsList from '../../../components/NewsList'
-import { DUMMY_NEWS } from '../../../lib/constants/dummy-news'
-import React from 'react'
 
-const News = () => {
+const News = async () => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_LOCAL_API}/news`)
+
+    if (!response.ok) throw new Error('Failed to fetch news..')
+    const news = await response.json()
+
     return (
         <>
             <h1>News Page</h1>
-            <NewsList news={DUMMY_NEWS} />
+            <NewsList news={news} />
         </>
     )
 }
